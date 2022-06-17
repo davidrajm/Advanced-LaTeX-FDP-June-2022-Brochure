@@ -1,0 +1,104 @@
+\renewcommand{\baselinestretch}{1.15}
+
+
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{flowfram}
+\usepackage{fontawesome}
+
+
+\usepackage{framed}
+
+
+%%---Tikz Related
+\usepackage{tikz}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes.symbols}
+
+
+
+%%%-- Custom Colors
+\definecolor{primaryColor}{HTML}{800000}
+\definecolor{secondaryColor}{HTML}{DE3163}
+
+
+\usepackage[colorlinks=true, urlcolor=secondaryColor]{hyperref}
+\urlstyle{same}
+
+
+
+%%%--- Title formats------
+\usepackage{titlesec}
+\setmainfont{roboto}
+
+\titleformat*{\section}{\large\color{primaryColor}\bfseries}
+
+
+%%%--- For Shade box---
+\newcommand*\openquote{\makebox(25,-22){\scalebox{5}{``}}}
+\newcommand*\closequote{\makebox(25,-22){\scalebox{5}{''}}}
+
+\colorlet{shadecolor}{primaryColor!10}
+
+\makeatletter
+\newif\if@right
+\def\shadequote{\@righttrue\shadequote@i}
+\def\shadequote@i{\begin{snugshade}\begin{quote}\openquote}
+		\def\endshadequote{%
+			\if@right\hfill\fi\closequote\end{quote}\end{snugshade}}
+\@namedef{shadequote*}{\@rightfalse\shadequote@i}
+\@namedef{endshadequote*}{\endshadequote}
+\makeatother
+
+
+% Make a border along the top of each page
+\setmargins{15mm}{15mm}{7mm}{7mm}
+\vtwotonetop{1cm}{0.6\paperwidth}{[cmyk]{0,0.91,0.92,0.41}}{topleft}{0.4\paperwidth}{[cmyk]{0,0.91,0.92,0.41}}{topright}
+\vtwotonebottom[1,6]{1cm}{0.6\paperwidth}{[cmyk]{0,0.91,0.92,0.41}}{bottomleft}{0.4\paperwidth}{[cmyk]{0,0.91,0.92,0.41}}{bottomright}
+
+\pagestyle{empty}
+
+
+
+%%%--- Custom Commands for ease
+
+\newcommand{\topic}[1]{\textbf{\textcolor{secondaryColor}{#1}}\newline}
+\newcommand{\desc}[1]{{\small\textcolor{gray!75!black}{#1}}}
+
+%\newcommand{\campusImage}[1]{\includegraphics[width=\linewidth]{#1}}
+\newcommand{\campusImage}[1]{}
+
+\newcommand*{\ClipSep}{.1cm}%
+\newcommand{\speaker}[4]{%
+	\begin{minipage}{.3\textwidth}
+		\begin{tikzpicture}
+			\node [inner sep=0pt] at (0,0) {\includegraphics[width=.75\textwidth]{img/#4}};
+			\draw [gray!15,  rounded corners=\ClipSep, line width=\ClipSep] 
+			(current bounding box.north west) -- 
+			(current bounding box.north east) --
+			(current bounding box.south east) --
+			(current bounding box.south west) -- cycle
+			;
+		\end{tikzpicture}
+	\end{minipage}%
+	\begin{minipage}{.7\textwidth}
+		\textcolor{secondaryColor}{\textbf{#1}}\\
+		\begin{small}
+			\color{gray!75!black}
+			#2, #3
+		\end{small}
+	\end{minipage}
+}
+
+
+%%%%--- To avoid hyphenation-----
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
